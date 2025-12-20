@@ -6,6 +6,7 @@ from torchvision import transforms
 import numpy as np
 from typing import List, Optional, Tuple
 import cv2
+from PIL import Image
 
 
 class VideoSegmenter:
@@ -68,8 +69,11 @@ class VideoSegmenter:
         # Convert BGR to RGB
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         
+        # Convert to PIL Image for compatibility with torchvision transforms
+        pil_image = Image.fromarray(frame_rgb)
+        
         # Apply transform
-        input_tensor = self.transform(frame_rgb)
+        input_tensor = self.transform(pil_image)
         
         return input_tensor
     
