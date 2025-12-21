@@ -54,6 +54,10 @@ mask-stabilization/
 ├── notebooks/
 │   └── analysis.ipynb           # Interactive analysis notebook
 │
+├── frontend/
+│   ├── index.html               # Web frontend (HTML/CSS/JS)
+│   └── README.md                # Frontend documentation
+│
 ├── spark_frontend/
 │   └── SPARK_PROMPT.md          # GitHub Spark frontend prompt
 │
@@ -279,16 +283,39 @@ Higher instability = more flickering
 - **Instability Reduction**: Percentage decrease in flickering
 - **Min/Max IoU**: Range of consistency values
 
-## 🎨 Frontend (GitHub Spark)
+## 🎨 Frontend
 
-Create an interactive web interface using the prompt in `spark_frontend/SPARK_PROMPT.md`.
+A clean, modern web interface is available in the `frontend/` directory.
+
+### Quick Start
+
+1. **Start the API server:**
+   ```bash
+   uvicorn src.main:app --host 0.0.0.0 --port 8000
+   ```
+
+2. **Open the frontend:**
+   - Simply open `frontend/index.html` in a web browser, or
+   - Serve it with a simple HTTP server:
+     ```bash
+     cd frontend
+     python -m http.server 8080
+     ```
+   - Navigate to `http://localhost:8080/index.html`
+
+### Features
 
 The frontend provides:
-- Video upload and preview
-- Real-time processing status
-- Interactive frame viewer
-- Metrics visualization with charts
-- Method and parameter selection
+- **Drag-and-drop video upload** with format validation
+- **Real-time processing status** with progress tracking
+- **Interactive frame viewer** with navigation controls
+- **Metrics visualization** showing IoU improvements
+- **Configuration options** for object classes and stabilization methods
+- **Responsive design** that works on all screen sizes
+
+See `frontend/README.md` for detailed documentation.
+
+For an alternative GitHub Spark interface, see the prompt in `spark_frontend/SPARK_PROMPT.md`.
 
 ## 🔍 Example Workflow
 
