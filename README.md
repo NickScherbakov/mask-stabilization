@@ -2,6 +2,20 @@
 
 A complete system for reducing flickering in frame-by-frame video segmentation using temporal smoothing techniques.
 
+## 🌐 Project Presentation
+
+**Live Demo:** [https://nickscherbakov.github.io/mask-stabilization/](https://nickscherbakov.github.io/mask-stabilization/)
+
+A comprehensive presentation website (in Russian) showcasing:
+- Problem statement and visual explanations
+- System architecture and technologies
+- Stabilization methods with formulas
+- Experimental results and metrics
+- API documentation
+- Q&A section for homework defense
+
+See [docs/GITHUB_PAGES_SETUP.md](docs/GITHUB_PAGES_SETUP.md) for GitHub Pages setup instructions.
+
 ## 📋 Overview
 
 This project implements a full pipeline for:
@@ -42,6 +56,10 @@ mask-stabilization/
 ├── requirements.txt             # Python dependencies
 ├── Dockerfile                   # Docker container setup
 ├── docker-compose.yml           # Docker composition
+│
+├── docs/                        # Presentation website (GitHub Pages)
+│   ├── index.html               # Main presentation page (Russian)
+│   └── GITHUB_PAGES_SETUP.md    # Setup instructions
 │
 ├── src/
 │   ├── __init__.py
