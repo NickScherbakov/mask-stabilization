@@ -69,11 +69,15 @@ class VideoSegmenter:
         # Convert BGR to RGB
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         
-        # Convert to PIL Image for compatibility with torchvision transforms
-        pil_image = Image.fromarray(frame_rgb)
+        # Manual tensor conversion (bypasses torchvision ToTensor for NumPy 2.x compatibility)
+        img = frame_rgb.astype('float32') / 255.0
+        img = img. transpose((2, 0, 1))  # HWC -> CHW format
+        input_tensor = torch.tensor(img, dtype=torch.float32)
         
-        # Apply transform
-        input_tensor = self.transform(pil_image)
+        # Apply ImageNet normalization manually
+        mean = torch.tensor([0.485, 0.456, 0.406]).view(3, 1, 1)
+        std = torch.tensor([0.229, 0.224, 0.225]).view(3, 1, 1)
+        input_tensor = (input_tensor - mean) / std
         
         return input_tensor
     
@@ -111,13 +115,13 @@ class VideoSegmenter:
         
         # Resize to original size
         binary_mask = cv2.resize(
-            binary_mask.astype(np.float32),
+            np.asarray(binary_mask, dtype=np.float32),
             (target_size[1], target_size[0]),
             interpolation=cv2.INTER_NEAREST
         ).astype(np.uint8)
         
         prob_map = cv2.resize(
-            prob_map,
+            np.asarray(prob_map, dtype=np. float32),
             (target_size[1], target_size[0]),
             interpolation=cv2.INTER_LINEAR
         ).astype(np.float32)
