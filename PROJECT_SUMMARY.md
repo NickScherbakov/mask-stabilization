@@ -1,5 +1,7 @@
 # Project Summary: Mask Stabilization System
 
+**Автор:** Чубарова Дарья Алексеевна
+
 ## Project Status: ✅ COMPLETE
 
 All required components have been implemented according to the specification.

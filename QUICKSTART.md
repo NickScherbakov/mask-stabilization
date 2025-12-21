@@ -1,5 +1,7 @@
 # Quick Start Guide
 
+**Автор:** Чубарова Дарья Алексеевна
+
 This guide will help you get the Mask Stabilization system up and running quickly.
 
 ## Prerequisites

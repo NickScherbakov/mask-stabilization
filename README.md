@@ -1,5 +1,7 @@
 # Mask Stabilization System
 
+**Автор:** Чубарова Дарья Алексеевна
+
 A complete system for reducing flickering in frame-by-frame video segmentation using temporal smoothing techniques.
 
 ## 🌐 Project Presentation
