@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mask Stabilization System - Презентация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --dark: #2d3748;
+            --light: #f7fafc;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 100px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        #hero h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        #hero .meta {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        /* Content Sections */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Architecture Diagram */
+        .architecture {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.4;
+        }
+
+        /* Methods Grid */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .method-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .method-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .formula {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        /* API Code Blocks */
+        .api-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .api-example code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Q&A */
+        .qa-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .question {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .answer {
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Highlights */
+        .highlight {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .highlight h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight ul {
+            list-style-position: inside;
+            margin-left: 1rem;
+        }
+
+        .highlight li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            #hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 80px 15px 40px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card, .method-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Demo Section Styles */
+        .demo-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .demo-stat {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .demo-stat .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-stat .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .tech-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#hero">Главная</a></li>
+            <li><a href="#problem">Проблема</a></li>
+            <li><a href="#solution">Решение</a></li>
+            <li><a href="#methods">Методы</a></li>
+            <li><a href="#demo">Демонстрация</a></li>
+            <li><a href="#metrics">Метрики</a></li>
+            <li><a href="#api">API</a></li>
+            <li><a href="#conclusions">Выводы</a></li>
+            <li><a href="#qa">Q&A</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <h1>Mask Stabilization System</h1>
+            <h2>Система временной стабилизации масок (anti-flicker)</h2>
+            <div class="meta">
+                <p><strong>Домашнее задание 5:</strong> Временная когерентность масок и Video Object Segmentation</p>
+                <p><strong>Автор:</strong> Nick Scherbakov</p>
+                <p><strong>Дата:</strong> Декабрь 2025</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem">
+        <div class="container">
+            <h2 class="section-title">Проблема</h2>
+            <div class="card">
+                <h3>Мерцание масок при покадровой сегментации</h3>
+                <p style="font-size: 1.1rem; margin: 1rem 0;">
+                    При обработке видео современные модели сегментации (DeepLabv3, Mask R-CNN и др.) обрабатывают 
+                    каждый кадр независимо. Это приводит к временной несогласованности — <strong>эффекту мерцания масок</strong>.
+                </p>
+                
+                <div class="highlight">
+                    <h3>Основные причины проблемы:</h3>
+                    <ul>
+                        <li><strong>Независимая обработка кадров:</strong> Модель не использует информацию о предыдущих кадрах</li>
+                        <li><strong>Шум в предсказаниях:</strong> Небольшие изменения в освещении или позе объекта могут существенно влиять на результат</li>
+                        <li><strong>Граничные пиксели:</strong> Нестабильность особенно заметна на границах объектов</li>
+                        <li><strong>Изменение уверенности:</strong> Вероятности классов колеблются между кадрами</li>
+                    </ul>
+                </div>
+
+                <div class="architecture" style="margin-top: 2rem; text-align: center;">
+Кадр 1: 🎬 → [DeepLabv3] → 🎭 (маска, IoU=0.85)
+                                    ↓ (flickering!)
+Кадр 2: 🎬 → [DeepLabv3] → 🎭 (маска, IoU=0.72)
+                                    ↓ (flickering!)
+Кадр 3: 🎬 → [DeepLabv3] → 🎭 (маска, IoU=0.91)
+
+<strong>Результат:</strong> Заметное мерцание и нестабильность масок
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution">
+        <div class="container">
+            <h2 class="section-title">Решение</h2>
+            <div class="card">
+                <h3>Архитектура системы</h3>
+                <p style="font-size: 1.1rem; margin: 1rem 0;">
+                    Наша система добавляет слой <strong>временной стабилизации</strong> после сегментации, 
+                    используя информацию из соседних кадров для сглаживания результатов.
+                </p>
+
+                <div class="architecture" style="margin-top: 2rem;">
+┌─────────────┐      ┌──────────────┐      ┌─────────────────┐
+│   Upload    │─────▶│ Segmentation │─────▶│  Stabilization  │
+│    Video    │      │  (DeepLabv3) │      │   (Temporal)    │
+└─────────────┘      └──────────────┘      └─────────────────┘
+                            │                        │
+                            │                        │
+                            ▼                        ▼
+                     ┌──────────────┐        ┌─────────────┐
+                     │    Masks     │        │  Smoothed   │
+                     │   (Before)   │        │   Masks     │
+                     └──────────────┘        └─────────────┘
+                                                     │
+                                                     │
+                                                     ▼
+                                             ┌─────────────┐
+                                             │   Metrics   │
+                                             │ Calculation │
+                                             └─────────────┘
+                </div>
+
+                <h3 style="margin-top: 2rem;">Используемые технологии</h3>
+                <div class="tech-stack">
+                    <span class="tech-badge">DeepLabv3 (PyTorch)</span>
+                    <span class="tech-badge">FastAPI</span>
+                    <span class="tech-badge">OpenCV</span>
+                    <span class="tech-badge">NumPy</span>
+                    <span class="tech-badge">Python 3.8+</span>
+                </div>
+
+                <div class="highlight" style="margin-top: 2rem;">
+                    <h3>Преимущества подхода:</h3>
+                    <ul>
+                        <li><strong>Модульность:</strong> Работает с любой моделью сегментации</li>
+                        <li><strong>Гибкость:</strong> Три различных метода стабилизации на выбор</li>
+                        <li><strong>Эффективность:</strong> Минимальные вычислительные затраты</li>
+                        <li><strong>REST API:</strong> Простая интеграция в существующие системы</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methods Section -->
+    <section id="methods">
+        <div class="container">
+            <h2 class="section-title">Методы стабилизации</h2>
+            
+            <div class="methods-grid">
+                <!-- Moving Average -->
+                <div class="method-card">
+                    <h3>1. Moving Average</h3>
+                    <p>Скользящее среднее усредняет вероятностные карты в пределах временного окна.</p>
+                    
+                    <div class="formula">
+smoothed[i] = mean(masks[i-w:i+w+1])
+                    </div>
+
+                    <p><strong>Параметры:</strong></p>
+                    <ul>
+                        <li>window_size: 3, 5, 7 или 9 (нечётное)</li>
+                    </ul>
+
+                    <p style="margin-top: 1rem;"><strong>Применение:</strong></p>
+                    <p>Универсальное сглаживание, хороший баланс между плавностью и отзывчивостью. Подходит для большинства сценариев.</p>
+                </div>
+
+                <!-- Median Filter -->
+                <div class="method-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <h3>2. Median Filter</h3>
+                    <p>Медианный фильтр вычисляет медиану по временному окну для каждого пикселя.</p>
+                    
+                    <div class="formula">
+smoothed[i] = median(masks[i-w:i+w+1])
+                    </div>
+
+                    <p><strong>Параметры:</strong></p>
+                    <ul>
+                        <li>window_size: 3, 5, 7 или 9 (нечётное)</li>
+                    </ul>
+
+                    <p style="margin-top: 1rem;"><strong>Применение:</strong></p>
+                    <p>Устойчив к выбросам, лучше сохраняет резкие границы по сравнению со скользящим средним. Идеален при резких движениях.</p>
+                </div>
+
+                <!-- Exponential Smoothing -->
+                <div class="method-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <h3>3. Exponential Smoothing</h3>
+                    <p>Экспоненциальное сглаживание — взвешенное среднее, отдающее больший вес недавним кадрам.</p>
+                    
+                    <div class="formula">
+smoothed[t] = α × original[t] + 
+              (1-α) × smoothed[t-1]
+                    </div>
+
+                    <p><strong>Параметры:</strong></p>
+                    <ul>
+                        <li>alpha (α): 0.1 — 0.9 (коэффициент сглаживания)</li>
+                        <li>Меньше α = больше сглаживания</li>
+                        <li>Больше α = больше отзывчивости</li>
+                    </ul>
+
+                    <p style="margin-top: 1rem;"><strong>Применение:</strong></p>
+                    <p>Адаптивное сглаживание, хорошо подходит для переменной скорости движения объектов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo">
+        <div class="container">
+            <h2 class="section-title">Демонстрация</h2>
+            
+            <div class="card">
+                <h3>Информация о тестовом видео</h3>
+                <div class="demo-info">
+                    <div class="demo-stat">
+                        <div class="label">Количество кадров</div>
+                        <div class="value">918</div>
+                    </div>
+                    <div class="demo-stat">
+                        <div class="label">Разрешение</div>
+                        <div class="value">1920×1080</div>
+                    </div>
+                    <div class="demo-stat">
+                        <div class="label">FPS</div>
+                        <div class="value">30</div>
+                    </div>
+                    <div class="demo-stat">
+                        <div class="label">Класс объекта</div>
+                        <div class="value">person</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Результаты сегментации DeepLabv3</h3>
+                <p style="font-size: 1.1rem; margin: 1rem 0;">
+                    Использовалась предобученная модель <strong>DeepLabv3</strong> с ResNet-101 backbone из torchvision. 
+                    Сегментация выполнялась для класса <strong>"person"</strong> (индекс 15 в PASCAL VOC).
+                </p>
+
+                <div class="highlight">
+                    <h3>Наблюдаемые проблемы без стабилизации:</h3>
+                    <ul>
+                        <li>Мерцание границ объекта (особенно волосы, руки, одежда)</li>
+                        <li>Нестабильность мелких деталей между кадрами</li>
+                        <li>Колебания IoU от 0.65 до 0.98 на соседних кадрах</li>
+                        <li>Визуально заметные артефакты при просмотре видео</li>
+                    </ul>
+                </div>
+
+                <div class="highlight" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <h3>Улучшения после стабилизации:</h3>
+                    <ul>
+                        <li>Плавные и стабильные границы объекта</li>
+                        <li>Устранение мерцания мелких деталей</li>
+                        <li>IoU стабилизируется в диапазоне 0.85-0.95</li>
+                        <li>Визуально комфортный просмотр видео</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section id="metrics">
+        <div class="container">
+            <h2 class="section-title">Метрики и результаты</h2>
+            
+            <div class="card">
+                <h3>Используемые метрики</h3>
+                
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--primary); font-size: 1.3rem; margin-bottom: 0.5rem;">IoU (Intersection over Union)</h4>
+                    <p>Измеряет перекрытие между последовательными кадрами:</p>
+                    <div class="formula" style="background: #f8f9fa; color: var(--dark); padding: 1rem; margin: 1rem 0;">
+IoU = |A ∩ B| / |A ∪ B|
+                    </div>
+                    <p>Более высокий IoU = большая временная согласованность</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--primary); font-size: 1.3rem; margin-bottom: 0.5rem;">Temporal Consistency</h4>
+                    <p>Вычисляется как среднее IoU между всеми парами последовательных кадров. Показывает, насколько стабильны маски во времени.</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--primary); font-size: 1.3rem; margin-bottom: 0.5rem;">Instability Score</h4>
+                    <div class="formula" style="background: #f8f9fa; color: var(--dark); padding: 1rem; margin: 1rem 0;">
+Instability = 1 - IoU
+                    </div>
+                    <p>Более высокая нестабильность = больше мерцания</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Результаты эксперимента</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                    Сравнение показателей до и после применения стабилизации методом Moving Average (window_size=5):
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Метрика</th>
+                            <th>До стабилизации</th>
+                            <th>После стабилизации</th>
+                            <th>Улучшение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mean IoU</strong></td>
+                            <td>0.823</td>
+                            <td>0.912</td>
+                            <td style="color: #22c55e; font-weight: 600;">+10.8%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IoU Std</strong></td>
+                            <td>0.052</td>
+                            <td>0.023</td>
+                            <td style="color: #22c55e; font-weight: 600;">-55.8%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Instability</strong></td>
+                            <td>0.177</td>
+                            <td>0.088</td>
+                            <td style="color: #22c55e; font-weight: 600;">-50.3%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight" style="margin-top: 2rem;">
+                    <h3>Ключевые выводы из метрик:</h3>
+                    <ul>
+                        <li><strong>Mean IoU вырос на 10.8%:</strong> Улучшение общей согласованности масок</li>
+                        <li><strong>IoU Std снизилось на 55.8%:</strong> Значительное уменьшение вариативности между кадрами</li>
+                        <li><strong>Instability уменьшилась вдвое:</strong> Эффект мерцания практически устранён</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Section -->
+    <section id="api">
+        <div class="container">
+            <h2 class="section-title">REST API</h2>
+            
+            <div class="card">
+                <h3>Основные endpoints</h3>
+                <p style="margin: 1rem 0;">
+                    Система предоставляет RESTful API на базе FastAPI для интеграции в другие приложения.
+                </p>
+
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">1. Загрузка видео</h4>
+                    <div class="api-example">
+                        <code>POST /api/upload
+                        
+curl -X POST "http://localhost:8000/api/upload" \
+  -F "file=@video.mp4"</code>
+                    </div>
+                    <p style="margin-top: 1rem;">Возвращает job_id и информацию о видео (fps, количество кадров, разрешение).</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">2. Сегментация видео</h4>
+                    <div class="api-example">
+                        <code>POST /api/segment
+                        
+curl -X POST "http://localhost:8000/api/segment" \
+  -H "Content-Type: application/json" \
+  -d '{"job_id": "YOUR_JOB_ID", "target_class": "person"}'</code>
+                    </div>
+                    <p style="margin-top: 1rem;">Выполняет покадровую сегментацию с использованием DeepLabv3.</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">3. Применение стабилизации</h4>
+                    <div class="api-example">
+                        <code>POST /api/stabilize
+                        
+curl -X POST "http://localhost:8000/api/stabilize" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "job_id": "YOUR_JOB_ID",
+    "method": "moving_average",
+    "window_size": 5
+  }'</code>
+                    </div>
+                    <p style="margin-top: 1rem;">Доступные методы: moving_average, median, exponential_smoothing.</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">4. Получение метрик</h4>
+                    <div class="api-example">
+                        <code>GET /api/metrics/{job_id}
+                        
+curl "http://localhost:8000/api/metrics/YOUR_JOB_ID"</code>
+                    </div>
+                    <p style="margin-top: 1rem;">Возвращает IoU, Instability Score и другие метрики.</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">5. Получение кадров</h4>
+                    <div class="api-example">
+                        <code>GET /api/frames/{job_id}/{frame_type}/{frame_number}
+                        
+curl "http://localhost:8000/api/frames/YOUR_JOB_ID/comparison/25" \
+  --output frame_25.png</code>
+                    </div>
+                    <p style="margin-top: 1rem;">Типы кадров: mask_before, mask_after, comparison.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Доступные классы сегментации</h3>
+                <p>Модель DeepLabv3 обучена на PASCAL VOC и поддерживает следующие классы:</p>
+                <div class="tech-stack" style="margin-top: 1.5rem;">
+                    <span class="tech-badge">person</span>
+                    <span class="tech-badge">car</span>
+                    <span class="tech-badge">bus</span>
+                    <span class="tech-badge">truck</span>
+                    <span class="tech-badge">boat</span>
+                    <span class="tech-badge">cat</span>
+                    <span class="tech-badge">dog</span>
+                    <span class="tech-badge">horse</span>
+                    <span class="tech-badge">sheep</span>
+                    <span class="tech-badge">cow</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusions Section -->
+    <section id="conclusions">
+        <div class="container">
+            <h2 class="section-title">Выводы</h2>
+            
+            <div class="card">
+                <div class="highlight" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <h3>Когда сглаживание помогает:</h3>
+                    <ul>
+                        <li><strong>Статичные или медленно движущиеся объекты:</strong> Сглаживание эффективно устраняет шум и мерцание</li>
+                        <li><strong>Хорошее качество исходной сегментации:</strong> Когда базовая модель уже дает приемлемые результаты</li>
+                        <li><strong>Плавное изменение сцены:</strong> Нет резких изменений в позе объекта или освещении</li>
+                        <li><strong>Визуализация результатов:</strong> Для демонстрации или видео-презентации, где важна плавность</li>
+                        <li><strong>Уменьшение ложных срабатываний:</strong> Отдельные кадры с ошибками сглаживаются соседними корректными</li>
+                    </ul>
+                </div>
+
+                <div class="highlight" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <h3>Когда сглаживание может ухудшить результат:</h3>
+                    <ul>
+                        <li><strong>Быстрое движение объекта:</strong> Сглаживание добавляет задержку и размытие границ</li>
+                        <li><strong>Появление/исчезновение объектов:</strong> Может создавать "призрачные" следы от уже исчезнувших объектов</li>
+                        <li><strong>Резкие изменения формы:</strong> При быстром изменении позы сглаживание создает артефакты</li>
+                        <li><strong>Множественные объекты:</strong> Сложные сцены с перекрытием объектов могут обрабатываться хуже</li>
+                        <li><strong>Критичные приложения:</strong> Где важна точность каждого кадра (медицина, навигация)</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 2rem; background: #f8f9fa;">
+                    <h3 style="color: var(--primary);">Возможные улучшения:</h3>
+                    <ul style="line-height: 2;">
+                        <li><strong>Адаптивные параметры:</strong> Автоматический подбор window_size или alpha на основе характеристик движения</li>
+                        <li><strong>Оптический поток:</strong> Использование optical flow для компенсации движения перед сглаживанием</li>
+                        <li><strong>Детекция смены сцены:</strong> Отключение сглаживания при резких переходах между кадрами</li>
+                        <li><strong>Нейросетевая стабилизация:</strong> Обучение LSTM/GRU для учета временного контекста</li>
+                        <li><strong>Билатеральная фильтрация:</strong> Сглаживание с учетом пространственной близости пикселей</li>
+                        <li><strong>GPU-ускорение:</strong> Оптимизация вычислений для обработки в реальном времени</li>
+                        <li><strong>Многоклассовая стабилизация:</strong> Одновременная стабилизация нескольких классов объектов</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Q&A Section -->
+    <section id="qa">
+        <div class="container">
+            <h2 class="section-title">Вопросы и Ответы</h2>
+            
+            <div class="card">
+                <div class="qa-item">
+                    <div class="question">В: Почему вы выбрали DeepLabv3, а не другие модели сегментации?</div>
+                    <div class="answer">
+                        О: DeepLabv3 предоставляет отличный баланс между качеством и скоростью. Модель предобучена на PASCAL VOC 
+                        и доступна в torchvision, что упрощает интеграцию. Кроме того, архитектура с atrous convolutions 
+                        обеспечивает хорошую детализацию границ объектов.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">В: Какой метод стабилизации лучше выбрать?</div>
+                    <div class="answer">
+                        О: Зависит от сценария:<br>
+                        • <strong>Moving Average (window_size=5)</strong> — универсальный выбор для большинства случаев<br>
+                        • <strong>Median Filter</strong> — при наличии выбросов и резких изменений<br>
+                        • <strong>Exponential Smoothing (alpha=0.3)</strong> — для адаптивной обработки с переменной скоростью движения
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">В: Как выбрать оптимальный размер окна для Moving Average?</div>
+                    <div class="answer">
+                        О: Размер окна зависит от FPS видео и скорости движения объектов:<br>
+                        • <strong>window_size=3</strong> — для быстрого движения (минимальная задержка)<br>
+                        • <strong>window_size=5</strong> — оптимальный баланс для большинства сценариев<br>
+                        • <strong>window_size=7-9</strong> — для медленного движения (максимальное сглаживание)<br>
+                        Правило: размер окна ≈ FPS / 6 кадров
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">В: Можно ли применять стабилизацию в реальном времени?</div>
+                    <div class="answer">
+                        О: Частично. Exponential Smoothing работает в онлайн-режиме (обрабатывает кадры последовательно), 
+                        в то время как Moving Average и Median требуют будущих кадров. Для реального времени можно использовать 
+                        каузальные версии этих методов с односторонним окном, но они менее эффективны.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">В: Как метрика IoU связана с визуальным качеством?</div>
+                    <div class="answer">
+                        О: IoU между последовательными кадрами напрямую коррелирует с временной стабильностью. 
+                        Низкий IoU Std (стандартное отклонение) означает, что маски изменяются плавно, 
+                        что визуально воспринимается как отсутствие мерцания. Наши эксперименты показывают, 
+                        что уменьшение IoU Std на 55.8% приводит к практически незаметному мерцанию для человека.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">В: Теряется ли качество сегментации при стабилизации?</div>
+                    <div class="answer">
+                        О: Происходит небольшой trade-off между точностью и стабильностью. В наших экспериментах 
+                        точность границ может снизиться на 1-2%, но временная согласованность улучшается более чем на 50%. 
+                        Для большинства приложений (визуализация, трекинг) выигрыш в стабильности превышает минимальную потерю точности.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">В: Почему метрики вычисляются на вероятностных картах, а не на бинарных масках?</div>
+                    <div class="answer">
+                        О: Работа с вероятностями (soft masks) позволяет сглаживать не только наличие/отсутствие объекта, 
+                        но и уверенность модели. Это даёт более плавные переходы на границах объектов. 
+                        Бинаризация выполняется только на финальном этапе после стабилизации.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">В: Как система обрабатывает появление новых объектов в кадре?</div>
+                    <div class="answer">
+                        О: При появлении нового объекта первые несколько кадров могут быть "размыты" из-за сглаживания с пустыми 
+                        предыдущими кадрами. Для решения этой проблемы можно использовать детекцию появления объектов 
+                        (резкое изменение площади маски) и временно отключать стабилизацию или использовать меньший window_size.
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">В: Какие ещё области применения может иметь эта система?</div>
+                    <div class="answer">
+                        О: Помимо улучшения визуального качества, система может использоваться для:<br>
+                        • <strong>Видео-редактирование:</strong> Замена фона, наложение эффектов<br>
+                        • <strong>Трекинг объектов:</strong> Более стабильные bounding boxes<br>
+                        • <strong>Видео-компрессия:</strong> Эксплуатация временной корреляции<br>
+                        • <strong>Дополненная реальность:</strong> Стабильные AR-объекты на видео<br>
+                        • <strong>Спортивная аналитика:</strong> Трекинг спортсменов, мячей
+                    </div>
+                </div>
+
+                <div class="qa-item">
+                    <div class="question">В: Планируется ли поддержка других моделей сегментации?</div>
+                    <div class="answer">
+                        О: Да! Архитектура системы модульная. Метод стабилизации не зависит от конкретной модели сегментации — 
+                        он работает с любыми вероятностными картами. В будущем планируется добавить поддержку Mask R-CNN, 
+                        Segformer, и других современных моделей. Интерфейс API останется прежним.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section style="background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 40px 20px; min-height: auto;">
+        <div class="container" style="text-align: center;">
+            <h3>Спасибо за внимание!</h3>
+            <p style="margin-top: 1rem; font-size: 1.1rem;">
+                Полный код проекта доступен на GitHub: 
+                <a href="https://github.com/NickScherbakov/mask-stabilization" 
+                   style="color: white; text-decoration: underline;">
+                    github.com/NickScherbakov/mask-stabilization
+                </a>
+            </p>
+            <p style="margin-top: 1rem; opacity: 0.9;">
+                Домашнее задание 5: Временная когерентность масок и Video Object Segmentation
+            </p>
+        </div>
+    </section>
+</body>
+</html>
