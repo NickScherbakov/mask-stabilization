@@ -27,27 +27,24 @@ This project implements a full pipeline for:
 4. **REST API** for easy integration (FastAPI)
 5. **Interactive Analysis** with Jupyter notebooks
 
-## 🏗️ Architecture
+## 🏗️ Архитектура системы
 
-```
-┌─────────────┐      ┌──────────────┐      ┌─────────────────┐
-│   Upload    │─────▶│ Segmentation │─────▶│  Stabilization  │
-│    Video    │      │  (DeepLabv3) │      │   (Temporal)    │
-└─────────────┘      └──────────────┘      └─────────────────┘
-                            │                        │
-                            │                        │
-                            ▼                        ▼
-                     ┌──────────────┐        ┌─────────────┐
-                     │    Masks     │        │  Smoothed   │
-                     │   (Before)   │        │   Masks     │
-                     └──────────────┘        └─────────────┘
-                                                     │
-                                                     │
-                                                     ▼
-                                             ┌─────────────┐
-                                             │   Metrics   │
-                                             │ Calculation │
-                                             └─────────────┘
+Полный pipeline обработки видео: от загрузки до стабилизации масок и расчёта метрик.
+
+```mermaid
+flowchart LR
+    A[Upload Video] --> B[Segmentation<br/>DeepLabv3]
+    B --> C[Stabilization<br/>Temporal]
+    B --> D[Masks<br/>Before]
+    C --> E[Smoothed Masks]
+    E --> F[Metrics<br/>Calculation]
+    
+    style A fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    style B fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    style C fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style D fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style E fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style F fill:#fce4ec,stroke:#c2185b,stroke-width:2px
 ```
 
 ## 📁 Project Structure
