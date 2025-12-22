@@ -141,7 +141,7 @@
         /* Mermaid Diagram Container */
         .mermaid-container {
             background: #ffffff;
-            padding: 12rem 2rem;
+            padding: 16rem 2rem;
             border-radius: 8px;
             margin-top: 2rem;
             display: flex;
@@ -784,7 +784,7 @@ curl "http://localhost:8000/api/frames/YOUR_JOB_ID/comparison/25" \
                         <li><strong>Быстрое движение объекта:</strong> Сглаживание добавляет задержку и размытие границ</li>
                         <li><strong>Появление/исчезновение объектов:</strong> Может создавать "призрачные" следы от уже исчезн[...]
                         <li><strong>Резкие изменения формы:</strong> При быстром изменении позы сглаживание создает артефакты[...]
-                        <li><strong>Множественные объекты:</strong> Сложные сцены с перекрытием объектов могут обрабатыватьс[...]
+                        <li><strong>Множественные объекты:</strong> Сложные сцены with перекрытием объектов могут обрабатыватьс[...]
                         <li><strong>Критичные приложения:</strong> Где важна точность каждого кадра (медицина, навигация)</li>
                     </ul>
                 </div>
@@ -937,9 +937,12 @@ curl "http://localhost:8000/api/frames/YOUR_JOB_ID/comparison/25" \
         mermaid.initialize({ 
             startOnLoad: true,
             theme: 'default',
+            themeVariables: {
+                fontSize: '48px'
+            },
             flowchart: {
                 curve: 'basis',
-                padding: 20
+                padding: 40
             }
         });
     </script>
