@@ -100,6 +100,7 @@ def save_job_state(job_id: str):
         job_data.pop('frames', None)
         job_data.pop('masks_before', None)
         job_data.pop('masks_after', None)
+        job_data.pop('binary_masks', None)
         json.dump(job_data, f, indent=2)
 
 
@@ -486,6 +487,14 @@ async def delete_job(job_id: str):
         file.unlink()
     
     return {'message': 'Job deleted successfully'}
+
+# Serve frontend
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
+
+frontend_path = Path(__file__).parent.parent / "frontend"
+if frontend_path.exists():
+    app.mount("/app", StaticFiles(directory=str(frontend_path), html=True), name="frontend")
 
 
 if __name__ == "__main__":
